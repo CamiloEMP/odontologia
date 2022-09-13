@@ -11,9 +11,6 @@ class AppointmentController extends Controller
 {
     public function index()
     {
-        // if (!Auth::check()) {
-        //     return to_route('auth.login');
-        // }
         return view('appointment.index');
     }
 

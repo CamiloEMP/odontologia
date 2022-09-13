@@ -10,11 +10,6 @@ use Illuminate\Support\Facades\Auth;
 
 class AppointmentsAdminController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
         $appointments = Appointment::get();
