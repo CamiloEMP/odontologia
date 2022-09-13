@@ -10,6 +10,13 @@ use Illuminate\Support\Facades\Auth;
 class ScheduleAdminController extends Controller
 {
 
+    public function __construct()
+    {
+        $this->middleware('can:admin.schedule.index')->only('index');
+        $this->middleware('can:admin.schedule.create')->only('create');
+        $this->middleware('can:admin.schedule.edit')->only('edit');
+    }
+
     public function index()
     {
         if (!Auth::check()) {

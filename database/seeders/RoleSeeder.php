@@ -26,11 +26,13 @@ class RoleSeeder extends Seeder
 
         Permission::create(['name' => 'admin.index'])->assignRole($role1);
         Permission::create(['name' => 'admin.appointment.index'])->assignRole($role1);
+        Permission::create(['name' => 'admin.appointment.edit'])->assignRole($role1);
         Permission::create(['name' => 'admin.appointment.show'])->assignRole($role1);
 
         Permission::create(['name' => 'admin.schedule.index'])->assignRole($role1);
         Permission::create(['name' => 'admin.schedule.create'])->assignRole($role1);
         Permission::create(['name' => 'admin.schedule.edit'])->assignRole($role1);
+        Permission::create(['name' => 'admin.schedule.store'])->assignRole($role1);
         Permission::create(['name' => 'admin.schedule.update'])->assignRole($role1);
         Permission::create(['name' => 'admin.schedule.destroy'])->assignRole($role1);
     }

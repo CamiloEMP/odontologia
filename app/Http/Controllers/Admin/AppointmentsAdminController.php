@@ -4,12 +4,17 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Appointment;
-use App\Models\Schedule;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
 class AppointmentsAdminController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('can:admin.appointment.index')->only('index');
+        $this->middleware('can:admin.appointment.show')->only('show');
+        $this->middleware('can:admin.appointment.edit')->only('edit');
+    }
+
     public function index()
     {
         $appointments = Appointment::get();
@@ -18,9 +23,6 @@ class AppointmentsAdminController extends Controller
 
     public function show($id)
     {
-        if (!Auth::check()) {
-            return to_route('auth.login');
-        }
         $appointment = Appointment::find($id);
         return view('admin.appointment.show', ['appointment' => $appointment]);
     }
