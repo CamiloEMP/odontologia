@@ -20,9 +20,18 @@ class RoleSeeder extends Seeder
         $role2 = Role::create(['name' => 'Patient']);
 
         Permission::create(['name' => 'appointment.index'])->assignRole($role2);
-        Permission::create(['name' => 'appointment.create'])->assignRole($role2);;
-        Permission::create(['name' => 'appointment.show'])->assignRole($role2);;
-        Permission::create(['name' => 'appointment.store'])->assignRole($role2);;
-        Permission::create(['name' => 'appointment.showId'])->assignRole($role2);;
+        Permission::create(['name' => 'appointment.create'])->assignRole($role2);
+        Permission::create(['name' => 'appointment.show'])->assignRole($role2);
+        Permission::create(['name' => 'appointment.store'])->assignRole($role2);
+
+        Permission::create(['name' => 'admin.index'])->assignRole($role1);
+        Permission::create(['name' => 'admin.appointment.index'])->assignRole($role1);
+        Permission::create(['name' => 'admin.appointment.show'])->assignRole($role1);
+
+        Permission::create(['name' => 'admin.schedule.index'])->assignRole($role1);
+        Permission::create(['name' => 'admin.schedule.create'])->assignRole($role1);
+        Permission::create(['name' => 'admin.schedule.edit'])->assignRole($role1);
+        Permission::create(['name' => 'admin.schedule.update'])->assignRole($role1);
+        Permission::create(['name' => 'admin.schedule.destroy'])->assignRole($role1);
     }
 }

@@ -11,17 +11,14 @@ class AppointmentController extends Controller
 {
     public function index()
     {
-        if (!Auth::check()) {
-            return to_route('auth.login');
-        }
+        // if (!Auth::check()) {
+        //     return to_route('auth.login');
+        // }
         return view('appointment.index');
     }
 
     public function show()
     {
-        if (!Auth::check()) {
-            return to_route('auth.login');
-        }
         $user = Auth::user();
         $appointments = Appointment::where('id_user', $user->id)->get();
         return view('appointment.show', ['appointments' => $appointments]);
@@ -29,28 +26,17 @@ class AppointmentController extends Controller
 
     public function showId(Appointment $appointmentId)
     {
-        if (!Auth::check()) {
-            return to_route('auth.login');
-        }
-
         return view('appointment.showId', ['appointment' => $appointmentId]);
     }
 
     public function create()
     {
-        if (!Auth::check()) {
-            return to_route('auth.login');
-        }
         $schedules = Schedule::whereNull('appointment_id')->get();
         return view('appointment.create', ['schedules' => $schedules]);
     }
 
     public function store(Request $request)
     {
-        if (!Auth::check()) {
-            return to_route('auth.login');
-        }
-
         $request->validate([
             'title' => ['required'],
             'date' => ['required'],

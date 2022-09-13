@@ -22,16 +22,16 @@ use App\Http\Controllers\SignupController;
 */
 
 Route::get('/', HomeController::class)->name('home');
-Route::get('/cita', [AppointmentController::class, 'index'])->name('appointment.index');
-Route::get('/cita/agendar', [AppointmentController::class, 'create'])->name('appointment.create');
-Route::post('/cita/agendar', [AppointmentController::class, 'store'])->name('appointment.store');
-Route::get('/cita/todas', [AppointmentController::class, 'show'])->name('appointment.show');
-Route::get('/cita/{appointmentId}', [AppointmentController::class, 'showId'])->name('appointment.showId');
-Route::delete('/cita/{id}', [AppointmentController::class, 'destroy'])->name('appointment.destroy');
+Route::get('/cita', [AppointmentController::class, 'index'])->middleware('auth')->name('appointment.index');
+Route::get('/cita/agendar', [AppointmentController::class, 'create'])->middleware('auth')->name('appointment.create');
+Route::post('/cita/agendar', [AppointmentController::class, 'store'])->middleware('auth')->name('appointment.store');
+Route::get('/cita/todas', [AppointmentController::class, 'show'])->middleware('auth')->name('appointment.show');
+Route::get('/cita/{appointmentId}', [AppointmentController::class, 'showId'])->middleware('auth')->name('appointment.showId');
+Route::delete('/cita/{id}', [AppointmentController::class, 'destroy'])->middleware('auth')->name('appointment.destroy');
 
-Route::get('/admin', [AdminController::class, 'index'])->name('admin.index');
-Route::resource('/admin/schedules', ScheduleAdminController::class)->names('admin.schedule');
-Route::resource('/admin/appointment', AppointmentsAdminController::class)->names('admin.appointment');
+Route::get('/admin', [AdminController::class, 'index'])->middleware('auth')->middleware('can:admin.index')->name('admin.index');
+Route::resource('/admin/schedules', ScheduleAdminController::class)->middleware('auth')->middleware('can:admin.schedule')->names('admin.schedule');
+Route::resource('/admin/appointment', AppointmentsAdminController::class)->middleware('auth')->middleware('can:admin.appointment')->names('admin.appointment');
 
 Route::get('/login', [LoginController::class, 'show'])->name('auth.login');
 Route::post('/login', [LoginController::class, 'store'])->name('auth.loginStore');
