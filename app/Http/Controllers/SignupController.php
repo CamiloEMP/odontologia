@@ -20,8 +20,8 @@ class SignupController extends Controller
 
     public function store(SignupRequest $request)
     {
-        // dump($request->all());
         $user = User::create($request->validated());
+        $user->roles()->sync('2');
 
         session()->flash('login', 'Inicia Sesión para comprobar tus datos');
 
